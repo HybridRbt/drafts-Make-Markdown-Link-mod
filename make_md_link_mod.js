@@ -32,7 +32,7 @@ if (match) {
 		//fail to get a title, check if this is a twitter link
 		else if (twMatch) {
 			//this is a twitter link, leave it.
-			context.cancel();
+			//context.cancel();
 		}
 		else {
 			//the real fail case
@@ -44,6 +44,6 @@ if (match) {
 	}
 }
 else {
-	alert("No URL found on current line");
-	context.cancel();
+	//alert("No URL found on current line");
+	//context.cancel();
 }
