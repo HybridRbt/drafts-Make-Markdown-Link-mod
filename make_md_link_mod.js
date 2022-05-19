@@ -7,6 +7,7 @@ const twRe = /(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?
 const [st, len] = editor.getSelectedLineRange();
 const line = editor.getTextInRange(st, len);
 const match = line.match(urlRe);
+const twMatch = line.match(twRe);
 
 if (match) {
 	// we found a URL, make HTTP get request to fetch page
@@ -28,7 +29,13 @@ if (match) {
 			let newLine = line.replace(url, `[${title}](${url})`);
 			editor.setTextInRange(st, len, newLine);
 		}
+		//fail to get a title, check if this is a twitter link
+		else if (twMatch) {
+			//this is a twitter link, leave it.
+			context.cancel();
+		}
 		else {
+			//the real fail case
 			context.fail();
 		}
 	}
